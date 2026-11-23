@@ -1,7 +1,6 @@
 export const profile = {
   name: "Shahzaib",
   role: "AI Engineering Student",
-  email: "hello@your-email.com",
   github: "",
   linkedin: "",
   characterModel: "",

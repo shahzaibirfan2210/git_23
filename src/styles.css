@@ -357,7 +357,12 @@ button { color: inherit; }
 .contact-form input:focus, .contact-form textarea:focus { border-color: rgba(185, 243, 90, 0.62); }
 .contact-form textarea { min-height: 74px; }
 .form-submit { width: 100%; justify-content: space-between; margin-top: 22px; border: 0; }
+.form-submit:disabled { opacity: 0.7; cursor: wait; transform: none; }
 .form-note { margin-top: 10px; color: #72776f; font: 8px var(--mono); }
+.form-feedback { margin: 11px 0 0; font-size: 10px; line-height: 1.6; }
+.form-feedback.is-sent { color: var(--acid); }
+.form-feedback.is-error { color: #ff9f91; }
+.honeypot-field { display: none; }
 
 .site-footer { display: flex; min-height: 86px; align-items: center; justify-content: space-between; gap: 20px; padding: 18px var(--page-gutter); border-top: 1px solid var(--line); color: #73786f; font: 8px var(--mono); letter-spacing: 0.08em; }
 .footer-mark { color: var(--paper); font-family: "Manrope", sans-serif; font-size: 23px; }

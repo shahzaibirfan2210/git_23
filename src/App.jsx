@@ -351,16 +351,45 @@ function SocialLink({ href, label, icon: Icon }) {
 
 function Contact() {
   const form = useRef(null);
-  const [sent, setSent] = useState(false);
+  const [status, setStatus] = useState("idle");
+  const [feedback, setFeedback] = useState("");
 
-  const submit = (event) => {
+  const submit = async (event) => {
     event.preventDefault();
-    if (!form.current?.reportValidity()) return;
-    const fields = new FormData(form.current);
-    const subject = encodeURIComponent(`Portfolio hello from ${fields.get("name")}`);
-    const body = encodeURIComponent(`${fields.get("message")}\n\nReply to: ${fields.get("email")}`);
-    window.location.href = `mailto:${profile.email}?subject=${subject}&body=${body}`;
-    setSent(true);
+    const currentForm = form.current;
+    if (!currentForm?.reportValidity()) return;
+
+    const fields = new FormData(currentForm);
+    setStatus("sending");
+    setFeedback("");
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: fields.get("name"),
+          email: fields.get("email"),
+          message: fields.get("message"),
+          company: fields.get("company"),
+        }),
+      });
+      const result = await response.json();
+
+      if (!response.ok) {
+        setStatus("error");
+        setFeedback(result.error || "Could not send your message. Please try again.");
+        return;
+      }
+
+      currentForm.reset();
+      setStatus("sent");
+      setFeedback("Your message was sent. Thanks for reaching out.");
+    } catch (error) {
+      console.error("Could not send portfolio contact message.", error);
+      setStatus("error");
+      setFeedback("Could not send your message right now. Please try again.");
+    }
   };
 
   return (
@@ -375,25 +404,37 @@ function Contact() {
           <div className="contact-copy">
             <h2>Have an idea?<br />Let&apos;s build something <span>intelligent.</span></h2>
             <p className="body-copy">A question, a collaboration, or just a hello — my inbox is open.</p>
-            <a className="email-link" href={`mailto:${profile.email}`}><Mail size={17} />{profile.email}<ArrowUpRight size={15} /></a>
+            <a className="email-link" href="#contact-form"><Mail size={17} />SEND A MESSAGE THROUGH THE FORM<ArrowUpRight size={15} /></a>
             <div className="social-links">
               <SocialLink href={profile.github} label="GitHub" icon={Github} />
               <SocialLink href={profile.linkedin} label="LinkedIn" icon={Linkedin} />
             </div>
             <span className="contact-location"><span className="availability-dot" /> {profile.location}</span>
           </div>
-          <form className="contact-form" ref={form} onSubmit={submit}>
+          <form className="contact-form" id="contact-form" ref={form} onSubmit={submit} aria-busy={status === "sending"}>
             <div className="form-heading"><span>01 / SEND A NOTE</span><Sparkles size={16} /></div>
             <label htmlFor="contact-name">Your name</label>
-            <input id="contact-name" name="name" autoComplete="name" placeholder="How should I call you?" required />
+            <input id="contact-name" name="name" autoComplete="name" maxLength={120} placeholder="How should I call you?" required />
             <label htmlFor="contact-email">Email address</label>
-            <input id="contact-email" name="email" type="email" autoComplete="email" placeholder="you@example.com" required />
+            <input id="contact-email" name="email" type="email" autoComplete="email" maxLength={254} placeholder="you@example.com" required />
             <label htmlFor="contact-message">A little about it</label>
-            <textarea id="contact-message" name="message" rows="3" placeholder="What's on your mind?" required />
-            <button className="button button-primary form-submit" type="submit">
-              {sent ? <>Opening your email <Check size={16} /></> : <>Start a conversation <ArrowRight size={16} /></>}
+            <textarea id="contact-message" name="message" rows="3" maxLength={5000} placeholder="What's on your mind?" required />
+            <div className="honeypot-field" aria-hidden="true">
+              <label htmlFor="contact-company">Leave this field empty</label>
+              <input id="contact-company" name="company" tabIndex={-1} autoComplete="off" />
+            </div>
+            <button className="button button-primary form-submit" type="submit" disabled={status === "sending"}>
+              {status === "sending" ? <>Sending message… <ArrowRight size={16} /></> :
+                status === "sent" ? <>Message sent <Check size={16} /></> :
+                  status === "error" ? <>Try again <ArrowRight size={16} /></> :
+                    <>Send message <ArrowRight size={16} /></>}
             </button>
-            <span className="form-note">Opens your email app — no data stored here.</span>
+            {feedback && (
+              <p className={`form-feedback is-${status}`} role={status === "error" ? "alert" : "status"}>
+                {feedback}
+              </p>
+            )}
+            <span className="form-note">Delivered by email. Your address is used so Shahzaib can reply.</span>
           </form>
         </div>
       </div>

@@ -19,8 +19,28 @@ Open the local URL printed by Vite. Create a production build with
 ## Personalize
 
 Edit `src/data/portfolio.js` to update the bio, skills, project descriptions,
-technology tags, email, GitHub, and LinkedIn links. Project links start empty
+technology tags, GitHub, and LinkedIn links. Project links start empty
 intentionally; add real URLs before enabling them.
+
+## Contact form email delivery
+
+The form sends messages through a Vercel Function and Resend; the visitor's
+email address is set as `Reply-To`. It does not expose your inbox or Resend
+API key in browser code.
+
+1. Create a Resend API key and verify a sender domain in Resend.
+2. In Vercel, open **Project Settings → Environment Variables** and add:
+   - `RESEND_API_KEY` — your Resend API key.
+   - `CONTACT_TO_EMAIL` — the inbox that should receive messages.
+   - `CONTACT_FROM_EMAIL` — a sender address on your verified domain, such as
+     `Shahzaib Portfolio <contact@your-domain.com>`.
+3. Redeploy the Vercel project so the function receives the variables.
+
+``.env.example` shows the required variable names. Never commit real API keys.
+To test the function locally, install Vercel CLI (`npm install --global vercel`),
+link the project with `vercel link`, pull its environment variables with
+`vercel env pull .env.local`, then run `vercel dev`. Run the handler tests with
+`npm test`.
 
 To replace the abstract 3D hero placeholder with a rigged character, follow
 the instructions in `public/models/README.md`, add
