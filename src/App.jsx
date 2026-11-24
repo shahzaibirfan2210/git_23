@@ -14,6 +14,7 @@ import {
   MessageCircle,
   Menu,
   MoveUpRight,
+  Phone,
   Sparkles,
   X,
 } from "lucide-react";
@@ -363,7 +364,10 @@ function FloatingWhatsApp() {
       rel="noreferrer"
       aria-label="Chat with Shahzaib on WhatsApp"
     >
-      <MessageCircle size={31} strokeWidth={2.2} aria-hidden="true" />
+      <span className="whatsapp-float-mark" aria-hidden="true">
+        <MessageCircle size={41} strokeWidth={2} />
+        <Phone size={17} strokeWidth={2.5} />
+      </span>
       <span className="whatsapp-float-copy">
         <strong>Chat on WhatsApp</strong>
         <span>Send me a message</span>

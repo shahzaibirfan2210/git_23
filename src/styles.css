@@ -365,7 +365,9 @@ button { color: inherit; }
   transition: background 180ms ease, box-shadow 180ms ease, transform 180ms ease;
 }
 .whatsapp-float:hover { transform: translateY(-3px); background: #11783c; box-shadow: 0 15px 40px rgba(0, 0, 0, 0.46), 0 0 40px rgba(37, 211, 102, 0.34); }
-.whatsapp-float > svg:first-child { flex: 0 0 auto; color: #d7ffe3; }
+.whatsapp-float-mark { position: relative; display: grid; width: 42px; height: 42px; flex: 0 0 auto; place-items: center; color: #d7ffe3; }
+.whatsapp-float-mark > svg:first-child { width: 42px; height: 42px; }
+.whatsapp-float-mark > svg:last-child { position: absolute; top: 12px; left: 12px; width: 17px; height: 17px; transform: rotate(-24deg); }
 .whatsapp-float-copy { display: flex; flex-direction: column; gap: 3px; white-space: nowrap; }
 .whatsapp-float-copy strong { font-size: 12px; font-weight: 800; }
 .whatsapp-float-copy > span { color: rgba(255, 255, 255, 0.78); font-size: 9px; }
@@ -410,7 +412,9 @@ button { color: inherit; }
 }
 @media (max-width: 720px) {
   .whatsapp-float { right: 14px; bottom: 14px; min-height: 64px; gap: 9px; padding: 10px 15px; }
-  .whatsapp-float > svg:first-child { width: 27px; height: 27px; }
+  .whatsapp-float-mark { width: 36px; height: 36px; }
+  .whatsapp-float-mark > svg:first-child { width: 36px; height: 36px; }
+  .whatsapp-float-mark > svg:last-child { top: 10px; left: 10px; width: 15px; height: 15px; }
   .whatsapp-float-copy strong { font-size: 11px; }
   .whatsapp-float-copy > span { font-size: 8px; }
   :root { --page-gutter: 25px; }
