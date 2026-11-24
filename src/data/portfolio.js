@@ -1,6 +1,7 @@
 export const profile = {
   name: "Shahzaib",
   role: "AI Engineering Student",
+  email: "shahzaibirfan2210@gmail.com",
   whatsapp: "923275688560",
   github: "",
   linkedin: "",

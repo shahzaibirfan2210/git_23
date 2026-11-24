@@ -433,6 +433,12 @@ function Contact() {
             <h2>Have an idea?<br />Let&apos;s build something <span>intelligent.</span></h2>
             <p className="body-copy">A question, a collaboration, or just a hello — my inbox is open.</p>
             <a className="email-link" href="#contact-form"><Mail size={17} />SEND A MESSAGE THROUGH THE FORM<ArrowUpRight size={15} /></a>
+            <a
+              className="email-link email-link-direct"
+              href={`mailto:${profile.email}?subject=${encodeURIComponent("Hello from your portfolio")}`}
+            >
+              <Mail size={17} /> EMAIL ME DIRECTLY <ArrowUpRight size={15} />
+            </a>
             <div className="social-links">
               <SocialLink href={whatsappHref} label="WhatsApp" icon={MessageCircle} />
               <SocialLink href={profile.github} label="GitHub" icon={Github} />
