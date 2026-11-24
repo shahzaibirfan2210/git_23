@@ -11,6 +11,7 @@ import {
   Github,
   Linkedin,
   Mail,
+  MessageCircle,
   Menu,
   MoveUpRight,
   Sparkles,
@@ -28,6 +29,10 @@ const navItems = [
   ["Selected work", "#work"],
   ["Journey", "#journey"],
 ];
+
+const whatsappHref = `https://wa.me/${profile.whatsapp}?text=${encodeURIComponent(
+  "Hi Shahzaib, I found your portfolio and would like to connect.",
+)}`;
 
 const fadeUp = {
   hidden: { opacity: 0, y: 22 },
@@ -406,6 +411,7 @@ function Contact() {
             <p className="body-copy">A question, a collaboration, or just a hello — my inbox is open.</p>
             <a className="email-link" href="#contact-form"><Mail size={17} />SEND A MESSAGE THROUGH THE FORM<ArrowUpRight size={15} /></a>
             <div className="social-links">
+              <SocialLink href={whatsappHref} label="WhatsApp" icon={MessageCircle} />
               <SocialLink href={profile.github} label="GitHub" icon={Github} />
               <SocialLink href={profile.linkedin} label="LinkedIn" icon={Linkedin} />
             </div>

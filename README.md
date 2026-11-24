@@ -19,8 +19,9 @@ Open the local URL printed by Vite. Create a production build with
 ## Personalize
 
 Edit `src/data/portfolio.js` to update the bio, skills, project descriptions,
-technology tags, GitHub, and LinkedIn links. Project links start empty
-intentionally; add real URLs before enabling them.
+technology tags, WhatsApp number, GitHub, and LinkedIn links. The WhatsApp
+number should use the international country code without a leading `+`.
+Project links start empty intentionally; add real URLs before enabling them.
 
 ## Contact form email delivery
 
