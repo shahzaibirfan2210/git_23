@@ -354,6 +354,25 @@ function SocialLink({ href, label, icon: Icon }) {
   );
 }
 
+function FloatingWhatsApp() {
+  return (
+    <a
+      className="whatsapp-float"
+      href={whatsappHref}
+      target="_blank"
+      rel="noreferrer"
+      aria-label="Chat with Shahzaib on WhatsApp"
+    >
+      <MessageCircle size={31} strokeWidth={2.2} aria-hidden="true" />
+      <span className="whatsapp-float-copy">
+        <strong>Chat on WhatsApp</strong>
+        <span>Send me a message</span>
+      </span>
+      <ArrowUpRight className="whatsapp-float-arrow" size={16} aria-hidden="true" />
+    </a>
+  );
+}
+
 function Contact() {
   const form = useRef(null);
   const [status, setStatus] = useState("idle");
@@ -499,6 +518,7 @@ export default function App() {
     <>
       <AnimatePresence>{loading && <Loader onComplete={finishLoading} />}</AnimatePresence>
       <Cursor />
+      <FloatingWhatsApp />
       <div className="scroll-progress" aria-hidden="true" />
       <Header />
       <main>

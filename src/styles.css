@@ -347,6 +347,29 @@ button { color: inherit; }
 .social-link > svg:last-child { color: var(--acid); }
 .social-link.is-unset { color: #747970; }
 .social-link.is-unset .link-pending { margin-left: -2px; }
+.whatsapp-float {
+  position: fixed;
+  z-index: 70;
+  right: clamp(16px, 3vw, 30px);
+  bottom: clamp(16px, 3vw, 30px);
+  display: inline-flex;
+  min-height: 72px;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 19px;
+  border: 1px solid rgba(228, 255, 236, 0.48);
+  border-radius: 999px;
+  color: #fff;
+  background: #168d48;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.42), 0 0 32px rgba(37, 211, 102, 0.26);
+  transition: background 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+}
+.whatsapp-float:hover { transform: translateY(-3px); background: #11783c; box-shadow: 0 15px 40px rgba(0, 0, 0, 0.46), 0 0 40px rgba(37, 211, 102, 0.34); }
+.whatsapp-float > svg:first-child { flex: 0 0 auto; color: #d7ffe3; }
+.whatsapp-float-copy { display: flex; flex-direction: column; gap: 3px; white-space: nowrap; }
+.whatsapp-float-copy strong { font-size: 12px; font-weight: 800; }
+.whatsapp-float-copy > span { color: rgba(255, 255, 255, 0.78); font-size: 9px; }
+.whatsapp-float-arrow { color: #d7ffe3; }
 .contact-location { display: flex; align-items: center; gap: 9px; margin-top: 34px; color: #737970; font: 8px var(--mono); letter-spacing: 0.07em; }
 .contact-form { display: flex; flex-direction: column; padding: 24px 24px 20px; border: 1px solid rgba(228, 238, 216, 0.1); background: rgba(17, 21, 26, 0.62); }
 .form-heading { display: flex; align-items: center; justify-content: space-between; margin-bottom: 26px; color: #899083; font: 8px var(--mono); letter-spacing: 0.1em; }
@@ -386,6 +409,10 @@ button { color: inherit; }
   .contact-layout { gap: 7%; }
 }
 @media (max-width: 720px) {
+  .whatsapp-float { right: 14px; bottom: 14px; min-height: 64px; gap: 9px; padding: 10px 15px; }
+  .whatsapp-float > svg:first-child { width: 27px; height: 27px; }
+  .whatsapp-float-copy strong { font-size: 11px; }
+  .whatsapp-float-copy > span { font-size: 8px; }
   :root { --page-gutter: 25px; }
   .site-header { height: 67px; }
   .site-header.is-scrolled { height: 60px; }
